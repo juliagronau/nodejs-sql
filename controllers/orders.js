@@ -46,9 +46,20 @@ const updateOrderById = async (req, res) => {
   }
 };
 
+const deleteOrderById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query("DELETE FROM orders WHERE id=$1;", [id]);
+    res.json({ message: "Order has been deleted successfully" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   getAllOrders,
   getOrderById,
   createNewOrder,
   updateOrderById,
+  deleteOrderById,
 };
