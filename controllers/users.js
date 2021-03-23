@@ -47,4 +47,20 @@ const updateUserById = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getUserById, createNewUser, updateUserById };
+const deleteUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query("DELETE FROM users WHERE id=$1;", [id]);
+    res.json({ message: "user deleted successfully" });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  getUserById,
+  createNewUser,
+  updateUserById,
+  deleteUserById,
+};
