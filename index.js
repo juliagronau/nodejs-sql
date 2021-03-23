@@ -10,6 +10,7 @@ const {
   getAllOrders,
   getOrderById,
   createNewOrder,
+  updateOrderById,
 } = require("./controllers/orders");
 const app = express();
 const port = process.env.PORT || 3001;
@@ -27,6 +28,6 @@ app
 
 app.route("/orders").get(getAllOrders).post(createNewOrder);
 
-app.route("/orders/:id").get(getOrderById);
+app.route("/orders/:id").get(getOrderById).put(updateOrderById);
 
 app.listen(port, () => console.log(`Server running in port: ${port}`));
