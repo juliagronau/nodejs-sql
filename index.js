@@ -6,7 +6,11 @@ const {
   updateUserById,
   deleteUserById,
 } = require("./controllers/users");
-const { getAllOrders, getOrderById } = require("./controllers/orders");
+const {
+  getAllOrders,
+  getOrderById,
+  createNewOrder,
+} = require("./controllers/orders");
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -21,7 +25,7 @@ app
   .put(updateUserById)
   .delete(deleteUserById);
 
-app.route("/orders").get(getAllOrders);
+app.route("/orders").get(getAllOrders).post(createNewOrder);
 
 app.route("/orders/:id").get(getOrderById);
 
