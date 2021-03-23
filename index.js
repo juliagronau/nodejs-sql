@@ -6,7 +6,7 @@ const {
   updateUserById,
   deleteUserById,
 } = require("./controllers/users");
-const { getAllOrders } = require("./controllers/orders");
+const { getAllOrders, getOrderById } = require("./controllers/orders");
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -22,5 +22,7 @@ app
   .delete(deleteUserById);
 
 app.route("/orders").get(getAllOrders);
+
+app.route("/orders/:id").get(getOrderById);
 
 app.listen(port, () => console.log(`Server running in port: ${port}`));
