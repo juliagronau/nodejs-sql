@@ -19,4 +19,18 @@ const getUserById = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getUserById };
+const createNewUser = async (req, res) => {
+  try {
+    const { first_name, last_name, age } = req.body;
+    const result = await pool.query(
+      "INSERT INTO users(first_name, last_name, age) values($1, $2, $3) RETURNING *;",
+      [first_name, last_name, age]
+    );
+    console.log(result);
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+module.exports = { getAllUsers, getUserById, createNewUser };
