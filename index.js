@@ -3,6 +3,7 @@ const {
   getAllUsers,
   getUserById,
   createNewUser,
+  updateUserById,
 } = require("./controllers/users");
 const app = express();
 const port = process.env.PORT || 3001;
@@ -12,6 +13,6 @@ app.use(express.json());
 
 app.route("/users").get(getAllUsers).post(createNewUser);
 
-app.route("/users/:id").get(getUserById);
+app.route("/users/:id").get(getUserById).put(updateUserById);
 
 app.listen(port, () => console.log(`Server running in port: ${port}`));

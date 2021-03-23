@@ -33,4 +33,18 @@ const createNewUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getUserById, createNewUser };
+const updateUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { first_name, last_name, age } = req.body;
+    const result = await pool.query(
+      "UPDATE users SET first_name=$1, last_name=$2, age=$3 WHERE id=$4 RETURNING *;",
+      [first_name, last_name, age, id]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+module.exports = { getAllUsers, getUserById, createNewUser, updateUserById };
