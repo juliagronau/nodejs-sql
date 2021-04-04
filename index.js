@@ -19,6 +19,12 @@ const port = process.env.PORT || 3001;
 // Enable body parsing for JSON
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send(
+    "<h1>This is an API for training purposes.</h1><h2>These are the available endpoints:</h2><p>To retrieve all users: /users</p><p>To retrieve a single user: /users/:id</p><p>To retrieve all orders: /orders</p><p>To retrieve a single order: /orders/:id</p>"
+  );
+});
+
 app.route("/users").get(getAllUsers).post(createNewUser);
 
 app
